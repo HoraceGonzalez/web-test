@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      { "name": "typescript-tslint-plugin" }
+    ],
+    "moduleResolution": "node",
+    "target": "es6",
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "noLib": false,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "module": "CommonJS",
+    "lib": ["esnext"],
+    "types": ["node", "jest"],
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules"],
+    "include": ["./src"],
+}

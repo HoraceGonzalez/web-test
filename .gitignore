@@ -1,0 +1,51 @@
+# Project dependencies
+.cache
+.idea
+node_modules
+dist
+.env
+*.log
+secrets.yaml
+
+# Build directory
+/public
+.DS_Store
+/elk/data
+/data
+/data/dump.rdb
+!/data/localstack/**/*
+!/data/redis/**/*
+**/.npmrc
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Monorepo files
+**/public
+**/.cache
+.DS_Store
+packages/**/.env
+services/**/.env
+services/**/dist
+services/**/tmp/**/*
+packages/**/dist
+
+#vscode files
+.code-workspace
+
+deploy/build_paths.txt
+
+.google-private-key.pem
+jobs/google-feeds/availability_feeds/
+jobs/google-feeds/service_feeds/
+jobs/google-feeds/merchant_feeds/
+
+# Error logs
+yarn-error.log
+lerna-debug.log
+
+services/logstash/pipeline/.jdbc*
+
+kubernetes/api-gateway/**/*.tgz
