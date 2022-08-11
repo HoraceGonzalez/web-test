@@ -1,5 +1,6 @@
 import {
   Column,
+  Length,
   CreatedAt,
   DeletedAt,
   Model,
@@ -13,6 +14,7 @@ export class Restaurant extends Model<Restaurant> {
   @Column({ autoIncrement: true })
   id: number
 
+  @Length({ max: 255 })
   @Column
   name: string
 

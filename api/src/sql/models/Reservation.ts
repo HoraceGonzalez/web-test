@@ -1,5 +1,7 @@
 import {
   Column,
+  Length,
+  Index,
   CreatedAt,
   Model,
   PrimaryKey, Table,
@@ -23,16 +25,21 @@ export class Reservation extends Model<Reservation> {
   @BelongsTo(() => Inventory)
   inventory: Inventory
 
+  @Length({ max: 255 })
   @Column
   name: string
 
+  @Length({ max: 255 })
   @Column
+  @Index // assuming this is a unique index
   email: string
 
   @Column
+  @Index // this should be some kind of range index.
   party_size: number
 
   @Column
+  @Index
   reserved_at: Date
 
   @Column

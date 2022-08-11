@@ -1,11 +1,8 @@
 import {
   Column,
-  CreatedAt,
-  DeletedAt,
+  Index,
   Model,
-  DataType,
   PrimaryKey, Table,
-  UpdatedAt,
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript'
@@ -19,6 +16,7 @@ export class Inventory extends Model<Inventory> {
   id: number
 
   @Column
+  @Index
   @ForeignKey(() => Restaurant)
   restaurant_id: number
 
@@ -26,8 +24,10 @@ export class Inventory extends Model<Inventory> {
   restaurant: Restaurant
 
   @Column
+  @Index
   party_size: number
 
   @Column
+  @Index
   available_at: Date
 }
