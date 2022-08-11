@@ -1,89 +1,23 @@
 import Result from 'rust-result';
-import Joi from 'joi';
 import { Controller, Get, Post } from '@overnightjs/core'
 import { Request, Response } from 'express'
+import { requestHandler } from './requestHandling';
 
-import { PaginationParams, requestHandler, validateInput } from './requestHandling';
+import { CreateRestaurantRequest, ListRestaurantsRequest, validateCreateRestaurantRequest, validateListRestaurantRequest } from '../domain';
 
-import { Restaurant } from '../models';
-
-type ListRestaurantsRequest = { } & PaginationParams;
-
-const listRestaurantRequestSchema = Joi.object<ListRestaurantsRequest>({
-  offset: Joi.number().default(0),
-  limit: Joi.number().default(10),
-});
-
-type CreateRestaurantRequest = {
-  name : string;
-  addressLine1 : string;
-  addressLine2 : string | null;
-  city : string;
-  state : string;
-  zip : string;
-}
-
-const createRestaurantRequestSchema = Joi.object<CreateRestaurantRequest>({
-  name: Joi
-    .string()
-    .max(255)
-    .required(),
-
-  addressLine1: Joi
-    .string()
-    .max(255)
-    .required(),
-
-  addressLine2: Joi
-    .string()
-    .max(255),
-
-  city: Joi
-    .string()
-    .max(255)
-    .required(),
-
-  state: Joi
-    .string()
-    .min(2)
-    .max(2)
-    .required(),
-
-  zip: Joi
-    .string()
-    .min(5)
-    .max(10)
-    .required(),
-});
-
-async function createRestaurant(args:CreateRestaurantRequest) : Promise<Restaurant> {
-  const res = await Restaurant.create({
-    name: args.name,
-    address: [
-      args.addressLine1,
-      ...args.addressLine2?.length > 0
-        ? [args.addressLine2]
-        : [],
-      `${args.city}, ${args.state} ${args.zip}`
-    ].join(', '),
-  });
-
-  return Result.Ok(res);
-}
+import { createRestaurant, listRestaurants } from '../sql';
 
 const handleCreateRestaurantRequest = requestHandler(
-  (req: Request) => validateInput(createRestaurantRequestSchema, req.body),
+  (req: Request) => validateCreateRestaurantRequest(req.body),
   async (args: CreateRestaurantRequest) => {
-    return createRestaurant(args);
+    const restaurant = await createRestaurant(args);
+    return Result.Ok(restaurant);
   });
 
 const handleListRestaurantRequest = requestHandler(
-  (req: Request) => validateInput(listRestaurantRequestSchema, req.query),
+  (req: Request) => validateListRestaurantRequest(req.query),
   async (args: ListRestaurantsRequest) => {
-    const items = await Restaurant.findAndCountAll({
-      offset: args.offset,
-      limit: args.limit,
-    });
+    const items = await listRestaurants(args); 
     return Result.Ok(items);
   },
 );

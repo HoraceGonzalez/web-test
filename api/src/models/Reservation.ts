@@ -10,7 +10,7 @@ import {
 
 import { Inventory } from './Inventory';
 
-@Table({ tableName: 'reservation' })
+@Table({ tableName: 'reservations' })
 export class Reservation extends Model<Reservation> {
   @PrimaryKey
   @Column({ autoIncrement: true })
