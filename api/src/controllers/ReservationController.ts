@@ -23,6 +23,7 @@ const handleBookReservationRequest = requestHandler(
   async (args: BookReservationRequest) => {
     try {
       return await sequelize.transaction(async () => {
+        // if we're being RESTful, we should probably use a 201 here in cases where a reservation is created, along with setting the location header
         return bookReservation({
           ...args,
           date: roundDateTime(args.date, 15),

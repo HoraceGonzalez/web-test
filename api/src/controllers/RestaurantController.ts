@@ -11,6 +11,7 @@ const handleCreateRestaurantRequest = requestHandler(
   (req: Request) => validateCreateRestaurantRequest(req.body),
   async (args: CreateRestaurantRequest) => {
     const restaurant = await createRestaurant(args);
+    // if we're being RESTful, we should probably use a 201 here along with setting the location header
     return Result.Ok(restaurant);
   });
 
