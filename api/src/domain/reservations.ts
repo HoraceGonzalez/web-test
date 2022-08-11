@@ -53,7 +53,7 @@ export function bookReservationFactory(
   findAvailableInventory: (_args: BookReservationRequest) => Promise<Inventory[]>,
   bookReservation: (inventoryId: number, _args: BookReservationRequest) => Promise<BookedReservation>,
 ) {
-  return async (args: BookReservationRequest) : Promise<BookedReservation> => {
+  return async (args: BookReservationRequest) : Promise<Result<BookedReservation,string>> => {
     const existingReservations = await findExistingReservations(args); 
 
     if (existingReservations.length > 0) {
