@@ -3,7 +3,7 @@ import { Controller, Get, Post } from '@overnightjs/core'
 import { Request, Response } from 'express'
 import { CreateInventoryRequest, ListInventoryRequest, validateCreateInventoryRequest, validateListInventoryRequest } from '../domain';
 
-import { requestHandler } from './requestHandling';
+import { requestHandler } from '../middleware';
 
 import { roundDateTime } from '../prelude';
 import { createInventory, listInventory } from '../sql';

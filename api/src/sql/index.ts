@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import * as models from '../models';
+import * as models from '../sql/models';
 
 export default new Sequelize(process.env.DATABASE_CONNECTION_STRING, {
   dialect: 'postgres',

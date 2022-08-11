@@ -1,5 +1,5 @@
 import { Restaurant, CreateRestaurantRequest, ListRestaurantsRequest, PagedList } from '../domain';
-import { Restaurant as RestaurantSqlModel } from '../models';
+import { Restaurant as RestaurantSqlModel } from '../sql/models';
 
 export async function createRestaurant(args: CreateRestaurantRequest) : Promise<Restaurant> {
   const res = await RestaurantSqlModel.create({

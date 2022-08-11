@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 
 import { Inventory, CreateInventoryRequest, ListInventoryRequest, PagedList } from '../domain';
-import { Restaurant as RestaurantSqlModel, Inventory as InventorySqlModel } from '../models';
+import { Restaurant as RestaurantSqlModel, Inventory as InventorySqlModel } from '../sql/models';
 
 export async function createInventory(args: CreateInventoryRequest) : Promise<Inventory> {
   const res : InventorySqlModel = await InventorySqlModel.create({

@@ -3,7 +3,7 @@ import { Controller, Put } from '@overnightjs/core'
 import { Request, Response } from 'express'
 import Logger from '../logger';
 
-import { requestHandler } from './requestHandling';
+import { requestHandler } from '../middleware';
 
 import { roundDateTime } from '../prelude';
 

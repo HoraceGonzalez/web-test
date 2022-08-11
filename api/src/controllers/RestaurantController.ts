@@ -1,7 +1,7 @@
 import Result from 'rust-result';
 import { Controller, Get, Post } from '@overnightjs/core'
 import { Request, Response } from 'express'
-import { requestHandler } from './requestHandling';
+import { requestHandler } from '../middleware';
 
 import { CreateRestaurantRequest, ListRestaurantsRequest, validateCreateRestaurantRequest, validateListRestaurantRequest } from '../domain';
 
@@ -22,6 +22,7 @@ const handleListRestaurantRequest = requestHandler(
     return Result.Ok(items);
   },
 );
+
 
 @Controller('restaurant')
 export class RestaurantController {

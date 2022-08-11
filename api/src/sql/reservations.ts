@@ -7,7 +7,7 @@ import {
   Restaurant as RestaurantSqlModel,
   Inventory as InventorySqlModel,
   Reservation as ReservationSqlModel,
-} from '../models';
+} from '../sql/models';
 
 export async function findExistingReservations(args: BookReservationRequest) : Promise<BookedReservation[]> {
   const res : BookedReservation[] = await sequelize.query(`
